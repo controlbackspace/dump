@@ -9,21 +9,36 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 try {
     $conn->begin_transaction();
 
-    // === STEP 1: Generate a new PersonalDataID === //
-    function generateID($prefix, $length = 3) {
-        return $prefix . str_pad(mt_rand(1, pow(10, $length) - 1), $length, '0', STR_PAD_LEFT);
+    // === Function to get next sequential ID (e.g., PD012, B007) === //
+    function getNextID($conn, $table, $idColumn, $prefix, $padLength = 3) {
+        $query = "SELECT MAX($idColumn) AS max_id FROM $table WHERE $idColumn LIKE ?";
+        $likePattern = $prefix . '%';
+
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $likePattern);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        if ($row && $row['max_id']) {
+            $currentMax = (int)substr($row['max_id'], strlen($prefix));
+            $next = $currentMax + 1;
+        } else {
+            $next = 1;
+        }
+
+        return $prefix . str_pad($next, $padLength, '0', STR_PAD_LEFT);
     }
 
-    $personalDataID = generateID("PD");
+    $personalDataID = getNextID($conn, "personaldata", "PersonalDataID", "PD", 3);
     $businessID = null;
 
-    // === STEP 2: Get or Create Business Entry === //
+    // === STEP 1: Get or Create Business Entry === //
     $businessName = $_POST['employer'];
     $officeAddress = $_POST['officeAddress'];
     $officeTel = $_POST['officeTel'];
 
     if (!empty($businessName) && !empty($officeAddress) && !empty($officeTel)) {
-        // Check if business exists
         $stmt = $conn->prepare("SELECT BusinessID FROM business WHERE BusinessName = ? AND OfficeAddress = ? AND OfficeTelNum = ?");
         $stmt->bind_param("ssi", $businessName, $officeAddress, $officeTel);
         $stmt->execute();
@@ -32,15 +47,14 @@ try {
         if ($row = $result->fetch_assoc()) {
             $businessID = $row['BusinessID'];
         } else {
-            // Create new BusinessID
-            $businessID = generateID("B");
+            $businessID = getNextID($conn, "business", "BusinessID", "B", 3);
             $stmt = $conn->prepare("INSERT INTO business (BusinessID, BusinessName, OfficeAddress, OfficeTelNum) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("sssi", $businessID, $businessName, $officeAddress, $officeTel);
             $stmt->execute();
         }
     }
 
-    // === STEP 3: Insert into personaldata === //
+    // === STEP 2: Insert into personaldata === //
     $stmt = $conn->prepare("INSERT INTO personaldata (
         PersonalDataID, Name, Birthday, TelNum, MobileNum, Citizenship, MaritalStatus, 
         JobTitle, IncomeSourceType, YearsWithEmployer, BusinessID, HomeAddress, 
