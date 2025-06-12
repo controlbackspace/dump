@@ -1,0 +1,560 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* Container Layout */
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #fff;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 300px;
+    background-color: #fff;
+    border-right: 1px solid #e0e0e0;
+    padding: 2rem;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.logo-placeholder {
+    height: 60px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    max-height: 100%;
+    width: auto;
+}
+
+.steps-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+}
+
+.step-item:hover {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.step-item.active {
+    background-color: #fff;
+    border-color: #8a1538;
+    box-shadow: 0 2px 5px rgba(230, 57, 70, 0.1);
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.step-item.active .step-number {
+    background-color: #8a1538;
+    color: #fff;
+}
+
+.step-item.completed .step-number {
+    background-color: #2a9d8f;
+    color: #fff;
+}
+
+.step-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.step-info p {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* Main Form Area */
+.form-container {
+    flex: 1;
+    margin-left: 300px;
+    padding: 2rem;
+    max-width: 1200px;
+    background-color: #fff;
+}
+
+/* Form Step Visibility */
+.form-step {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.form-step.active {
+    display: grid;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Two-column layout for form fields */
+.form-step {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.form-step h2 {
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+}
+
+.form-step h3 {
+    grid-column: 1 / -1;
+    margin: 1.5rem 0 1rem;
+}
+
+/* Full-width sections */
+.form-step > .form-group:first-of-type {
+    grid-column: 1 / -1;
+}
+
+/* Make certain sections full width */
+.form-step > section {
+    grid-column: 1 / -1;
+}
+
+/* Adjust spacing for full-width sections */
+.form-step > section > .form-group {
+    margin-bottom: 1rem;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #8a1538;
+    box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+    background-color: #fff;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Section Headers */
+h2 {
+    color: #8a1538;
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+h3 {
+    color: #2b2d42;
+    margin: 2rem 0 1rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* Navigation Buttons */
+.form-navigation {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-prev {
+    background-color: #f8f9fa;
+    color: #666;
+    border: 1px solid #e0e0e0;
+}
+
+.btn-prev:hover:not(:disabled) {
+    background-color: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.btn-next {
+    background-color: #8a1538;
+    color: #fff;
+}
+
+.btn-next:hover {
+    background-color: #6b0e2e;
+    transform: translateY(-2px);
+}
+
+.btn-submit {
+    background-color: #2a9d8f;
+    color: #fff;
+}
+
+.btn-submit:hover {
+    background-color: #238b7e;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Error States */
+.error {
+    border-color: #e63946 !important;
+}
+
+.error-message {
+    color: #e63946;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .form-container {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .form-container {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .steps-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+    }
+
+    .step-item {
+        min-width: 200px;
+    }
+
+    .form-step {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-navigation {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .form-container {
+        padding: 1rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Record Containers */
+.loan-record,
+.reference-record {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.loan-record:not(:first-child),
+.reference-record:not(:first-child) {
+    margin-top: 1rem;
+}
+
+/* Full width form groups in records */
+.loan-record .form-group,
+.reference-record .form-group {
+    margin-bottom: 0;
+}
+
+/* Make certain fields full width */
+.loan-record .form-group:first-child,
+.reference-record .form-group:first-child,
+.loan-record .form-group:nth-child(2),
+.reference-record .form-group:nth-child(2) {
+    grid-column: 1 / -1;
+}
+
+/* Add Button */
+.btn-add {
+    background-color: #fff;
+    color: #8a1538;
+    border: 1px solid #8a1538;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: auto;
+    min-width: 180px;
+}
+
+.btn-add:hover {
+    background-color: #8a1538;
+    color: #fff;
+}
+
+/* Remove Button */
+.btn-remove {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background-color: #fff;
+    color: #e63946;
+    border: 1px solid #e63946;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    padding: 0;
+    z-index: 2;
+}
+
+.btn-remove:hover {
+    background-color: #e63946;
+    color: #fff;
+}
+
+/* Hide remove button for first record */
+.loan-record:first-child .btn-remove,
+.reference-record:first-child .btn-remove {
+    display: none;
+}
+
+/* Container for add buttons */
+.add-button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+    grid-column: 1 / -1;
+}
+
+/* Reference record specific styles */
+.reference-record {
+    grid-template-columns: 1fr;
+}
+
+.reference-record h3 {
+    grid-column: 1 / -1;
+    margin-bottom: 0.5rem;
+}
+
+/* Input with Symbol */
+.input-with-symbol {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-with-symbol .symbol {
+    position: absolute;
+    color: #666;
+    font-weight: 500;
+    pointer-events: none;
+    z-index: 1;
+    background-color: #f8f9fa;
+    padding: 0 4px;
+}
+
+.input-with-symbol .symbol:first-child {
+    left: 12px;
+}
+
+.input-with-symbol .symbol:last-child {
+    right: 12px;
+}
+
+.input-with-symbol input {
+    width: 100%;
+    padding-left: 35px;
+    background-color: #fff;
+}
+
+.input-with-symbol input:last-child {
+    padding-right: 35px;
+    /* padding-left: 12px; */
+}
+
+/* Adjust input padding when symbol is present */
+.input-with-symbol input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.input-with-symbol input[type="number"]::-webkit-outer-spin-button,
+.input-with-symbol input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Focus state for inputs with symbols */
+.input-with-symbol input:focus {
+    outline: none;
+    border-color: #8a1538;
+    box-shadow: 0 0 0 3px rgba(138, 21, 56, 0.1);
+}
+
+.input-with-symbol input:focus + .symbol {
+    color: #8a1538;
+}
+
+/* Return Button */
+.return-button {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    background: #8B0000;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(139, 0, 0, 0.2);
+}
+
+.return-button:hover {
+    background: #B22222;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
+}
+
+.return-button i {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .return-button {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+} 

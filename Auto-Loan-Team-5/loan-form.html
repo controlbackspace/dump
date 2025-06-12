@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarPlayLater - Loan Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/loan-form.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button class="return-button" onclick="window.location.href='landing.php'">
+        <i class="fas fa-arrow-left"></i>
+        Return to Home
+    </button>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-placeholder">
+                <img src="public/images/logo.png" alt="CarPlayLater Logo" class="logo">
+            </div>
+            <nav class="steps-nav">
+                <div class="step-item active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-info">
+                        <h3>Personal Information</h3>
+                        <p>Basic applicant details</p>
+                    </div>
+                </div>
+                <div class="step-item" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-info">
+                        <h3>Residence Information</h3>
+                        <p>Address and living details</p>
+                    </div>
+                </div>
+                <div class="step-item" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-info">
+                        <h3>Financial Information</h3>
+                        <p>Existing loans</p>
+                    </div>
+                </div>
+                <div class="step-item" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-info">
+                        <h3>Loan Request Details</h3>
+                        <p>Vehicle and financing</p>
+                    </div>
+                </div>
+                <div class="step-item" data-step="5">
+                    <div class="step-number">5</div>
+                    <div class="step-info">
+                        <h3>References</h3>
+                        <p>Personal references</p>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Form Area -->
+        <main class="form-container">
+            <form id="loanApplicationForm" method="POST" action="submit_loan.php">
+>
+                <!-- Step 1: Personal Information -->
+                <section class="form-step active" data-step="1">
+                    <h2>Personal Information</h2>
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate">Birth Date</label>
+                        <input type="date" id="birthDate" name="birthDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Telephone Number</label>
+                        <input type="tel" id="telephone" name="telephone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="citizenship">Citizenship</label>
+                        <input type="text" id="citizenship" name="citizenship" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="maritalStatus">Marital Status</label>
+                        <select id="maritalStatus" name="maritalStatus" required>
+                            <option value="">Select...</option>
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                            <option value="divorced">Divorced</option>
+                            <option value="widowed">Widowed</option>
+                        </select>
+                    </div>
+
+                    <h3>Applicant Employment Information</h3>
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input type="text" id="jobTitle" name="jobTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeSource">Type of Income Source</label>
+                        <select id="incomeSource" name="incomeSource" required>
+                            <option value="">Select...</option>
+                            <option value="employment">Employment</option>
+                            <option value="own_business">Own Business</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="employer">Employer/Business Name</label>
+                        <input type="text" id="employer" name="employer" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="yearsWithEmployer">Years with Employer</label>
+                        <input type="number" id="yearsWithEmployer" name="yearsWithEmployer" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="officeAddress">Office Address</label>
+                        <textarea id="officeAddress" name="officeAddress" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="officeTel">Office Telephone Number</label>
+                        <input type="tel" id="officeTel" name="officeTel" required>
+                    </div>
+
+                    <h3>Spouse/Co-maker Information</h3>
+                    <div class="form-group">
+                        <label for="spouseName">Full Name</label>
+                        <input type="text" id="spouseName" name="spouseName">
+                    </div>
+                    <div class="form-group">
+                        <label for="spouseRelationship">Relationship to Applicant</label>
+                        <input type="text" id="spouseRelationship" name="spouseRelationship">
+                    </div>
+                    <div class="form-group">
+                        <label for="spouseJobTitle">Job Title</label>
+                        <input type="text" id="spouseJobTitle" name="spouseJobTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="spouseIncomeSource">Type of Income Source</label>
+                        <select id="spouseIncomeSource" name="spouseIncomeSource">
+                            <option value="">Select...</option>
+                            <option value="employment">Employment</option>
+                            <option value="own_business">Own Business</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="spouseEmployer">Employer/Business Name</label>
+                        <input type="text" id="spouseEmployer" name="spouseEmployer">
+                    </div>
+                    <div class="form-group">
+                        <label for="spouseYearsWithEmployer">Years with Employer</label>
+                        <input type="number" id="spouseYearsWithEmployer" name="spouseYearsWithEmployer">
+                    </div>
+                    <div class="form-group">
+                        <label for="spouseOfficeAddress">Office Address</label>
+                        <textarea id="spouseOfficeAddress" name="spouseOfficeAddress"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="spouseOfficeTel">Office Telephone Number</label>
+                        <input type="tel" id="spouseOfficeTel" name="spouseOfficeTel">
+                    </div>
+                </section>
+                
+                <!-- Step 2: Residence Information -->
+                <section class="form-step" data-step="2">
+                    <h2>Residence Information</h2>
+                    <div class="form-group">
+                        <label for="homeAddress">Home Address</label>
+                        <textarea id="homeAddress" name="homeAddress" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="yearsAtAddress">Years at Current Address</label>
+                        <input type="number" id="yearsAtAddress" name="yearsAtAddress" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="homeOwnership">Basis of Home Ownership</label>
+                        <select id="homeOwnership" name="homeOwnership" required>
+                            <option value="">Select...</option>
+                            <option value="owned">Owned</option>
+                            <option value="amortized">Amortized</option>
+                            <option value="used_free">Used Free</option>
+                            <option value="rented">Rented</option>
+                        </select>
+                    </div>
+                    <div class="form-group monthly-payment" style="display: none;">
+                        <label for="monthlyPayment">Monthly Payment</label>
+                        <div class="input-with-symbol">
+                            <span class="symbol">₱</span>
+                            <input type="number" id="monthlyPayment" name="monthlyPayment" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div id="previousAddressSection">
+                        <div class="form-group">
+                            <label for="previousAddress">Previous Home Address (if less than 2 years in current address) </label>
+                            <textarea id="previousAddress" name="previousAddress"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="yearsAtPreviousAddress">Years at Previous Address</label>
+                            <input type="number" id="yearsAtPreviousAddress" name="yearsAtPreviousAddress">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="provincialAddress">Provincial Address (if applicable)</label>
+                        <textarea id="provincialAddress" name="provincialAddress"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="yearsAtProvincialAddress">Years at Provincial Address</label>
+                        <input type="number" id="yearsAtProvincialAddress" name="yearsAtProvincialAddress">
+                    </div>
+                </section>
+
+                <!-- Step 3: Financial Information -->
+                <section class="form-step" data-step="3">
+                    <h2>Financial Information</h2>
+                    <h3>Existing Loans</h3>
+                    <div id="existingLoansContainer">
+                        <div class="loan-record">
+                            <div class="form-group">
+                                <label for="loanInstitution">Financial Institution</label>
+                                <input type="text" id="loanInstitution" name="loanInstitution[]">
+                            </div>
+                            <div class="form-group">
+                                <label for="monthlyAmortization">Monthly Amortization</label>
+                                <div class="input-with-symbol">
+                                    <span class="symbol">₱</span>
+                                    <input type="number" id="monthlyAmortization" name="monthlyAmortization[]" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="originalTerm">Original Term (months)</label>
+                                <input type="number" id="originalTerm" name="originalTerm[]">
+                            </div>
+                            <div class="form-group">
+                                <label for="remainingTerm">Remaining Term (months)</label>
+                                <input type="number" id="remainingTerm" name="remainingTerm[]">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-button-container">
+                        <button type="button" class="btn-add" id="addLoanBtn">
+                            <i class="fas fa-plus"></i> Add Loan
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Step 4: Loan Application Details -->
+                <section class="form-step" data-step="4">
+                    <h2>Loan Request Details</h2>
+                    <h3>Vehicle Information</h3>
+                    <div class="form-group">
+                        <label for="loanType">Loan Type</label>
+                        <select id="loanType" name="loanType" required>
+                            <option value="">Select...</option>
+                            <option value="brand_new">Brand New</option>
+                            <option value="secondhand">Secondhand</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="purposeUse">Purpose of Use</label>
+                        <select id="purposeUse" name="purposeUse" required>
+                            <option value="">Select...</option>
+                            <option value="private">Private</option>
+                            <option value="public">Public</option>
+                            <option value="business">Business</option>
+                            <option value="multipurpose">Multipurpose</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitModel">Unit Model Name and Year</label>
+                        <input type="text" id="unitModel" name="unitModel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="primaryUser">Primary User</label>
+                        <input type="text" id="primaryUser" name="primaryUser" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="relationshipToApplicant">Relationship to Applicant</label>
+                        <input type="text" id="relationshipToApplicant" name="relationshipToApplicant" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="placeUse">Place of Use</label>
+                        <input type="text" id="placeUse" name="placeUse" required>
+                    </div>
+
+                    <h3>Financing Information</h3>
+                    <div class="form-group">
+                        <label for="unitPrice">Unit Price</label>
+                        <div class="input-with-symbol">
+                            <span class="symbol">₱</span>
+                            <input type="number" id="unitPrice" name="unitPrice" required placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="downpayment">Downpayment</label>
+                        <div class="input-with-symbol">
+                            <input type="number" id="downpayment" name="downpayment" required placeholder="0">
+                            <span class="symbol">%</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanAmount">Loan Amount</label>
+                        <div class="input-with-symbol">
+                            <span class="symbol">₱</span>
+                            <input type="number" id="loanAmount" name="loanAmount" required placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="term">Term (months)</label>
+                        <input type="number" id="term" name="term" required>
+                    </div>
+                </section>
+
+                <!-- Step 5: References -->
+                <section class="form-step" data-step="5">
+                    <h2>References</h2>
+                    <div id="referencesContainer">
+                        <div class="reference-record">
+                            <h3>Reference 1</h3>
+                            <div class="form-group">
+                                <label for="ref1Name">Reference Name</label>
+                                <input type="text" id="ref1Name" name="refName[]" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ref1Address">Reference Address</label>
+                                <textarea id="ref1Address" name="refAddress[]" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="ref1Phone">Reference Telephone</label>
+                                <input type="tel" id="ref1Phone" name="refPhone[]" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-button-container">
+                        <button type="button" class="btn-add" id="addReferenceBtn">
+                            <i class="fas fa-plus"></i> Add Reference
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Navigation Buttons -->
+                <div class="form-navigation">
+                    <button type="button" class="btn-prev" disabled>Previous</button>
+                    <button type="button" class="btn-next">Next</button>
+                    <button type="submit" class="btn-submit" style="display: none;">Submit Application</button>
+                </div>
+            </form>
+        </main>
+    </div>
+    <script src="js/loan-form.js"></script>
+</body>
+</html> 

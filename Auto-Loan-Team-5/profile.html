@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Auto Loan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <style>
+        
+    </style>
+</head>
+<body>
+    <button class="return-button" onclick="window.location.href='landing.php'">
+        <i class="fas fa-arrow-left"></i>
+        Return to Home
+    </button>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Welcome, <span id="userName">User</span></h1>
+            <p>Manage your profile and track your loan applications</p>
+        </div>
+
+        <div class="profile-info">
+            <div class="info-card">
+                <h2>Personal Information</h2>
+                <p><strong>Name:</strong> <span id="fullName">-</span></p>
+                <p><strong>Email:</strong> <span id="userEmail">-</span></p>
+                <p><strong>Member Since:</strong> <span id="memberSince">-</span></p>
+            </div>
+
+            <div class="info-card">
+                <h2>Current Application</h2>
+                <div id="currentApplication" class="current-application">
+                    <p><strong>Application ID:</strong> <span id="appId">-</span></p>
+                    <p><strong>Status:</strong> <span id="appStatus" class="status-badge">-</span></p>
+                    <p><strong>Submitted Date:</strong> <span id="submitDate">-</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="loan-history">
+            <h2>Loan Application History</h2>
+            <div id="loanHistory">
+                <!-- Loan history items will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Get user data
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            if (userData) {
+                document.getElementById('userName').textContent = userData.firstName;
+                document.getElementById('fullName').textContent = `${userData.firstName} ${userData.lastName}`;
+                document.getElementById('userEmail').textContent = userData.email;
+                document.getElementById('memberSince').textContent = new Date().toLocaleDateString();
+            }
+
+            // Mock loan history data
+            const mockLoanHistory = [
+                {
+                    id: 'LOAN-001',
+                    amount: '$25,000',
+                    status: 'approved',
+                    date: '2024-03-15'
+                },
+                {
+                    id: 'LOAN-002',
+                    amount: '$15,000',
+                    status: 'pending',
+                    date: '2024-03-20'
+                }
+            ];
+
+            // Populate loan history
+            const loanHistoryContainer = document.getElementById('loanHistory');
+            mockLoanHistory.forEach(loan => {
+                const loanItem = document.createElement('div');
+                loanItem.className = 'loan-item';
+                loanItem.innerHTML = `
+                    <p><strong>Application ID:</strong> ${loan.id}</p>
+                    <p><strong>Amount:</strong> ${loan.amount}</p>
+                    <p><strong>Status:</strong> <span class="status-badge status-${loan.status}">${loan.status.toUpperCase()}</span></p>
+                    <p><strong>Date:</strong> ${loan.date}</p>
+                `;
+                loanHistoryContainer.appendChild(loanItem);
+            });
+
+            // Set current application details
+            const currentApp = mockLoanHistory[1]; // Using the pending application as current
+            document.getElementById('appId').textContent = currentApp.id;
+            document.getElementById('appStatus').textContent = currentApp.status.toUpperCase();
+            document.getElementById('appStatus').classList.add(`status-${currentApp.status}`);
+            document.getElementById('submitDate').textContent = currentApp.date;
+        });
+    </script>
+</body>
+</html> 
